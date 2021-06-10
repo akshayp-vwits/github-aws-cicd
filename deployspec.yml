@@ -11,5 +11,5 @@ phases:
       - npm install
   build:
     commands:
-      -  cdk deploy --app './cdk.out/'
+      -  npx cdk deploy --app './cdk.out/'
 
