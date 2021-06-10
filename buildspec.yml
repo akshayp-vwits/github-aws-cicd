@@ -1,10 +1,23 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+      java: corretto8
+  pre_build:
+    commands:
+      - echo Entered Pre Build Stage
+      - set -e -u -x
+      - chmod +x gradlew
+      - cd ./cdk
+      - npm install
   build:
     commands:
       - echo Entered Build Stage
       - echo Build Started
+      - npm run build
+      - cd ..
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
