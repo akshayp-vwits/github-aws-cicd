@@ -148,14 +148,7 @@ Resources:
                 Effect: Allow
               - Sid: CodePipelineCFAccess
                 Action:
-                  - cloudformation:*
-                Resource: "*"
-                Effect: Allow
-              - Condition:
-                  ForAnyValue:StringEquals:
-                    aws:CalledVia:
-                      - cloudformation.amazonaws.com
-                Action: "*"
+                  - 'cloudformation:*'
                 Resource: "*"
                 Effect: Allow
               - Sid: CodePipelineS3Access
