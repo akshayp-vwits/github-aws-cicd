@@ -1,7 +1,16 @@
 version: 0.2
 
 phases:
-  build:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
     commands:
       - echo Entered Deploy Stage
-      - echo Deploy Started
+      - cd ./cdk
+      - echo installing npm
+      - npm install
+  build:
+    commands:
+      - cdk deploy
+
