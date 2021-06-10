@@ -7,7 +7,7 @@ phases:
       - echo Build Started
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
-      - cp ./depec.yml artifacts
+      - cp ./deployspec.yml artifacts
 artifacts:
   files:
     - ./artifacts/*
