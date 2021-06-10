@@ -11,15 +11,18 @@ phases:
       - set -e -u -x
       - cd ./cdk
       - npm install
+      - npm install -g typescript
   build:
     commands:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
+      - npx cdk synth
       - cd ..
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
+      - cp -R ./cdk/cdk.out artifacts
 artifacts:
   files:
     - ./artifacts/*
