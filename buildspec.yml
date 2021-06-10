@@ -16,12 +16,12 @@ phases:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
-      - cdk synth
+      - npm cdk synth
       - cd ..
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
-      - cp ./cdk.out artifacts
+      - cp -R ./cdk/cdk.out artifacts
 artifacts:
   files:
     - ./artifacts/*
