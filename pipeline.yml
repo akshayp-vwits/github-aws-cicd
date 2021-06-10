@@ -146,6 +146,15 @@ Resources:
                   - 'codebuild:StartBuild'
                 Resource: "*"
                 Effect: Allow
+              - Sid: CodePipelineCFAccess
+                Action:
+                  - 'cloudformation:*'
+                Resource: "*"
+                Effect: Allow
+              - Sid: CodePipelineS3Access
+                Action: "s3:*"
+                Resource: "*"
+                Effect: Allow
 
 
   CodePipelineartifact:
