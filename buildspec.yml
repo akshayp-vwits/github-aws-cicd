@@ -25,4 +25,4 @@ phases:
       - cp -R ./cdk/cdk.out artifacts
 artifacts:
   files:
-    - ./artifacts/*
+    - ./artifacts/**/*
