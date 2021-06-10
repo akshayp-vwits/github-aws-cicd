@@ -20,6 +20,7 @@ phases:
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
+      - cp ./cdk.out artifacts
 artifacts:
   files:
     - ./artifacts/*

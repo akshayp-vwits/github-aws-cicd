@@ -7,10 +7,9 @@ phases:
   pre_build:
     commands:
       - echo Entered Deploy Stage
-      - ls ${CODEBUILD_SRC_DIR}
       - echo installing npm
       - npm install
   build:
     commands:
-      - cdk deploy
+      -  cdk deploy --app './cdk.out/'
 
