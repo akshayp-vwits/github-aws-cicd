@@ -9,6 +9,7 @@ phases:
       - echo Entered Deploy Stage
       - echo installing npm
       - npm install
+      - npm install -g typescript
   build:
     commands:
       -  npx cdk deploy --app './cdk.out/'
