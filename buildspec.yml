@@ -9,7 +9,6 @@ phases:
     commands:
       - echo Entered Pre Build Stage
       - set -e -u -x
-      - chmod +x gradlew
       - cd ./cdk
       - npm install
   build:
