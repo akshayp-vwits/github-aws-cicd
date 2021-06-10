@@ -16,6 +16,7 @@ phases:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
+      - cdk synth
       - cd ..
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
