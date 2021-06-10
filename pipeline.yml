@@ -58,7 +58,7 @@ Resources:
                   - 's3:GetBucketLocation'
                 Resource:
                   - '*'
-  CodeBuildSourceCredential:
+  CodeBuildSourceCredential1:
     Type: 'AWS::CodeBuild::SourceCredential'
     Properties:
       AuthType: PERSONAL_ACCESS_TOKEN
@@ -78,16 +78,20 @@ Resources:
         BuildSpec: buildspec.yml
         Auth:
           Type: OAUTH
-          Resource: !Ref CodeBuildSourceCredential
+          Resource: !Ref CodeBuildSourceCredential1
       Artifacts:
-        Type: NO_ARTIFACTS
+        Location: !Ref CodePipelineartifact
+        NamespaceType: BUILD_ID
+        Name: '/'
+        Path: 'develop'
+        Type: S3
       Triggers:
         Webhook: true
         FilterGroups:
           - - Type: EVENT
               Pattern: 'PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED'
             - Type: BASE_REF
-              Pattern: !Sub ^refs/heads/main$
+              Pattern: !Sub ^refs/heads/${GitHubBranch}$
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
@@ -187,10 +191,10 @@ Resources:
                 Owner: !Ref GitHubOwner
                 Repo: !Ref GitHubRepository
                 Branch: !Ref GitHubBranch
-                PollforSourceChanges: false
+                PollForSourceChanges: false
                 OAuthToken: '{{resolve:secretsmanager:GITHUB_ACCESS:SecretString:GITHUB_ACCESS_TOKEN}}'
               OutputArtifacts:
-              - Name: SourceCode
+                - Name: SourceCode
         - Name: Build
           Actions:
             - Name: Build
@@ -205,6 +209,35 @@ Resources:
                 - Name: BuildOutput
               InputArtifacts:
                 - Name: SourceCode
+        - Name: Dev
+          Actions:
+            - Name: Dev
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: !Ref CodeDeployProjectDev
+              InputArtifacts:
+                - Name: BuildOutput
 
-
-
+  CodeDeployProjectDev:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub '${AWS::StackName}-deploy-dev'
+      ServiceRole: !GetAtt
+        - CodeBuildServiceRole
+        - Arn
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: deployspec.yml
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/standard:5.0'
+        EnvironmentVariables:
+          - Name: ENV_NAME
+            Value: dev

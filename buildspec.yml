@@ -5,3 +5,11 @@ phases:
     commands:
       - echo Entered Build Stage
       - echo Build Started
+artifacts:
+  secondary-artifacts:
+    artifact1:
+      files:
+        - ./buildspec.yml
+    artifact2:
+      files:
+        - ./deployspec.yml
