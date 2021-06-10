@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       - echo Entered Deploy Stage
-      - cd ./cdk
+      - ls
       - echo installing npm
       - npm install
   build:
