@@ -10,6 +10,8 @@ phases:
       - echo installing npm
       - npm install
       - npm install -g aws-cdk
+      - ls
+      - ls ./cdk.out
   build:
     commands:
       - cdk deploy --app './cdk.out/'
