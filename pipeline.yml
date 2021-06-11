@@ -220,9 +220,9 @@ Resources:
                 - Name: BuildOutput
               InputArtifacts:
                 - Name: SourceCode
-        - Name: Dev
+        - Name: Develop_Deploy
           Actions:
-            - Name: Dev
+            - Name: Develop_Deploy
               ActionTypeId:
                 Category: Build
                 Owner: AWS
@@ -230,6 +230,40 @@ Resources:
                 Version: '1'
               Configuration:
                 ProjectName: !Ref CodeDeployProjectDev
+              InputArtifacts:
+                - Name: BuildOutput
+        - Name: Integration_Deploy
+          Actions:
+            - Name: Integration_Deploy
+              RunOrder: 1
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: !Ref CodeDeployProjectInt
+              InputArtifacts:
+                - Name: BuildOutput
+            - Name: Approval
+              RunOrder: 2
+              ActionTypeId:
+                Category: Approval
+                Owner: AWS
+                Provider: Manual
+                Version: '1'
+              Configuration:
+                CustomData: Approve or Reject for Prod Deployment
+        - Name: Production_Deploy
+          Actions:
+            - Name: Production_Deploy
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: !Ref CodeDeployProjectProd
               InputArtifacts:
                 - Name: BuildOutput
 
@@ -251,4 +285,44 @@ Resources:
         Image: 'aws/codebuild/standard:5.0'
         EnvironmentVariables:
           - Name: ENV_NAME
-            Value: dev
+            Value: develop
+
+  CodeDeployProjectInt:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub '${AWS::StackName}-deploy-int'
+      ServiceRole: !GetAtt
+        - CodeBuildServiceRole
+        - Arn
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: ./artifacts/deployintspec.yml
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/standard:5.0'
+        EnvironmentVariables:
+          - Name: ENV_NAME
+            Value: int
+
+  CodeDeployProjectProd:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub '${AWS::StackName}-deploy-prod'
+      ServiceRole: !GetAtt
+        - CodeBuildServiceRole
+        - Arn
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: ./artifacts/deployprodspec.yml
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/standard:5.0'
+        EnvironmentVariables:
+          - Name: ENV_NAME
+            Value: prod

@@ -22,6 +22,8 @@ phases:
       - mkdir artifacts
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
+      - cp ./deployintspec.yml artifacts
+      - cp ./deployprodspec.yml artifacts
       - cp -R ./cdk/cdk.out artifacts
 artifacts:
   files:
