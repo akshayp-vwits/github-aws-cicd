@@ -58,6 +58,17 @@ Resources:
                   - 's3:GetBucketLocation'
                 Resource:
                   - '*'
+              - Sid: CFNAccess
+                Action:
+                  - 'cloudformation:*'
+                Resource: "*"
+                Effect: Allow
+              - Sid: S3FullAccess
+                Action: "s3:*"
+                Resource: "*"
+                Effect: Allow
+
+
   CodeBuildSourceCredential1:
     Type: 'AWS::CodeBuild::SourceCredential'
     Properties:
@@ -144,15 +155,6 @@ Resources:
                 Action:
                   - 'codebuild:BatchGetBuilds'
                   - 'codebuild:StartBuild'
-                Resource: "*"
-                Effect: Allow
-              - Sid: CodePipelineCFAccess
-                Action:
-                  - 'cloudformation:*'
-                Resource: "*"
-                Effect: Allow
-              - Sid: CodePipelineS3Access
-                Action: "s3:*"
                 Resource: "*"
                 Effect: Allow
 
