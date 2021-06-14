@@ -10,7 +10,11 @@ phases:
       - echo Entered Pre Build Stage
       - set -e -u -x
       - mkdir artifacts
-      - cd ./cdk
+      - cd artifacts
+      - mkdir integration
+      - mkdir prelive
+      - mkdir live
+      - cd ../cdk
       - npm install
       - npm install -g typescript
   build:
