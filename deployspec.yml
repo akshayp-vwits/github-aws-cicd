@@ -10,7 +10,6 @@ phases:
       - echo installing npm
       - npm install
       - npm install -g aws-cdk
-      - ls ./artifacts/cdk.out/
   build:
     commands:
       - cdk deploy --app './artifacts/${ENV_NAME}/'
