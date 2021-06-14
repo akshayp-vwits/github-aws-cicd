@@ -35,4 +35,4 @@ phases:
       - cp ../deployprodspec.yml artifacts
 artifacts:
   files:
-    - ./artifacts/**/*
+    - ./artifacts/*
