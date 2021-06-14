@@ -13,5 +13,5 @@ phases:
       - ls ./artifacts/cdk.out/
   build:
     commands:
-      - cdk deploy --app './artifacts/${ENV_NAME}/cdk.out/'
+      - cdk deploy --app './artifacts/${ENV_NAME}/'
 
