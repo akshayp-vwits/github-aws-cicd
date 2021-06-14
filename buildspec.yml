@@ -20,6 +20,7 @@ phases:
       - npm run build
       - echo Executing Synth for Integration
       - npx cdk synth -c stage=integration
+      - ls
       - cp -R ./cdk.out artifacts/integration
       - echo Executing Synth for Prelive
       - npx cdk synth -c stage=prelive
