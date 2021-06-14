@@ -29,10 +29,10 @@ phases:
       - echo Executing Synth for Live
       - npx cdk synth -c stage=live
       - cp -R ./cdk.out ../artifacts/live
-      - cp ./buildspec.yml artifacts
-      - cp ./deployspec.yml artifacts
-      - cp ./deployintspec.yml artifacts
-      - cp ./deployprodspec.yml artifacts
+      - cp ../buildspec.yml artifacts
+      - cp ../deployspec.yml artifacts
+      - cp ../deployintspec.yml artifacts
+      - cp ../deployprodspec.yml artifacts
 artifacts:
   files:
     - ./artifacts/**/*
