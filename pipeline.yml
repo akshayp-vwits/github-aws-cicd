@@ -285,7 +285,7 @@ Resources:
         Image: 'aws/codebuild/standard:5.0'
         EnvironmentVariables:
           - Name: ENV_NAME
-            Value: develop
+            Value: integration
 
   CodeDeployProjectInt:
     Type: 'AWS::CodeBuild::Project'
@@ -305,7 +305,7 @@ Resources:
         Image: 'aws/codebuild/standard:5.0'
         EnvironmentVariables:
           - Name: ENV_NAME
-            Value: int
+            Value: integration
 
   CodeDeployProjectProd:
     Type: 'AWS::CodeBuild::Project'

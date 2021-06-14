@@ -9,6 +9,7 @@ phases:
     commands:
       - echo Entered Pre Build Stage
       - set -e -u -x
+      - mkdir artifacts
       - cd ./cdk
       - npm install
       - npm install -g typescript
@@ -17,14 +18,19 @@ phases:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
-      - npx cdk synth
-      - cd ..
-      - mkdir artifacts
+      - echo Executing Synth for Integration
+      - npx cdk synth -c stage=integration
+      - cp -R ./cdk.out artifacts/integration
+      - echo Executing Synth for Prelive
+      - npx cdk synth -c stage=prelive
+      - cp -R ./cdk.out artifacts/prelive
+      - echo Executing Synth for Live
+      - npx cdk synth -c stage=live
+      - cp -R ./cdk.out artifacts/live
       - cp ./buildspec.yml artifacts
       - cp ./deployspec.yml artifacts
       - cp ./deployintspec.yml artifacts
       - cp ./deployprodspec.yml artifacts
-      - cp -R ./cdk/cdk.out artifacts
 artifacts:
   files:
     - ./artifacts/**/*
