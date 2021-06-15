@@ -16,6 +16,10 @@ const envConfigs = {
     live: {
         account_id: '706755025331',
         region: "eu-west-1"
+    },
+    development: {
+        account_id: '221090739390',
+        region: "eu-west-1"
     }
 }
 

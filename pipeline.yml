@@ -157,6 +157,11 @@ Resources:
                   - 'codebuild:StartBuild'
                 Resource: "*"
                 Effect: Allow
+              - Sid: CrossAccountDeploy
+                Effect: Allow
+                Action: sts:AssumeRole
+                Resource:
+                  - arn:aws:iam::221090739390:role/Cross_Account_Deploy
 
 
   CodePipelineartifact:
@@ -285,7 +290,7 @@ Resources:
         Image: 'aws/codebuild/standard:5.0'
         EnvironmentVariables:
           - Name: ENV_NAME
-            Value: integration
+            Value: development
 
   CodeDeployProjectInt:
     Type: 'AWS::CodeBuild::Project'
