@@ -13,7 +13,7 @@ phases:
       - cd artifacts
       - mkdir integration
       - mkdir prelive
-      - mkdir live
+      - mkdir development
       - cd ../cdk
       - npm install
       - npm install -g typescript
@@ -29,9 +29,9 @@ phases:
       - echo Executing Synth for Prelive
       - npx cdk synth -c stage=prelive
       - cp -R ./cdk.out ../artifacts/prelive
-      - echo Executing Synth for Live
-      - npx cdk synth -c stage=live
-      - cp -R ./cdk.out ../artifacts/live
+      - echo Executing Synth for Dev
+      - npx cdk synth -c stage=development
+      - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
       - cp ../deployintspec.yml ../artifacts
