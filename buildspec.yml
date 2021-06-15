@@ -24,15 +24,9 @@ phases:
       - npm run build
       - echo Executing Synth for Integration
       - npx cdk bootstrap aws://064524996963/eu-west-1 aws://221090739390/eu-west-1
-      - npx cdk synth -c stage=integration
+      - npx cdk synth
       - ls
       - cp -R ./cdk.out ../artifacts/integration
-      - echo Executing Synth for Prelive
-      - npx cdk synth -c stage=prelive
-      - cp -R ./cdk.out ../artifacts/prelive
-      - echo Executing Synth for Dev
-      - npx cdk synth -c stage=development
-      - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
       - cp ../deployintspec.yml ../artifacts

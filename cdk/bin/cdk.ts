@@ -23,12 +23,12 @@ const envConfigs = {
     }
 }
 
-const stage = app.node.tryGetContext('stage')
+//const stage = app.node.tryGetContext('stage')
 // @ts-ignore
-const acc_no = envConfigs[stage].account_id
+//const acc_no = envConfigs[stage].account_id
 // @ts-ignore
-const region1 = envConfigs[stage].region
-new CdkStack(app, 'CdkStack', {env: { account: acc_no, region: region1 }
+//const region1 = envConfigs[stage].region
+new CdkStack(app, 'CdkStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
