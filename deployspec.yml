@@ -14,6 +14,5 @@ phases:
   build:
     commands:
       - cd ./artifacts/${ENV_NAME}
-      - cdk bootstrap --trust 064524996963 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess aws://221090739390/us-east-2
       - cdk deploy --app './cdk.out/'
 
