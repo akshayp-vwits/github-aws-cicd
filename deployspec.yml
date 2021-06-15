@@ -14,6 +14,6 @@ phases:
   build:
     commands:
       - cd ./artifacts/${ENV_NAME}
-      - aws sts assume-role --role-arn arn:aws:iam::221090739390:role/Cross_Account_Deploy --role-session-name cross-acc-deploy
+      - aws sts assume-role --role-arn arn:aws:iam::221090739390:role/Test_Crss --role-session-name cross-acc-deploy
       - cdk deploy --app './cdk.out/'
 
