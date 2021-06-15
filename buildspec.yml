@@ -31,7 +31,7 @@ phases:
       - cp -R ./cdk.out ../artifacts/prelive
       - echo Executing Synth for Dev
       - npx cdk synth -c stage=development
-      - npx cdk bootstrap --trust 064524996963 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess aws://221090739390/us-east-2
+      - npx cdk bootstrap -c stage=development --trust 064524996963 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess aws://221090739390/us-east-2
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
