@@ -23,6 +23,7 @@ phases:
       - echo Build Started
       - npm run build
       - echo Executing Synth for Integration
+      - npx cdk bootstrap aws://064524996963/eu-west-1 aws://221090739390/eu-west-1
       - npx cdk synth -c stage=integration
       - ls
       - cp -R ./cdk.out ../artifacts/integration
@@ -31,7 +32,6 @@ phases:
       - cp -R ./cdk.out ../artifacts/prelive
       - echo Executing Synth for Dev
       - npx cdk synth -c stage=development
-      - npx cdk bootstrap -c stage=development --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' aws://221090739390/eu-west-1 --trust 064524996963
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
