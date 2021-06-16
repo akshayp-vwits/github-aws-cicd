@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 14
       java: corretto8
   pre_build:
     commands:
@@ -11,26 +11,18 @@ phases:
       - set -e -u -x
       - mkdir artifacts
       - cd artifacts
-      - mkdir integration
-      - mkdir prelive
       - mkdir development
       - cd ../cdk
       - npm install
-      - npm install -g typescript
+      - npm install -g aws-cdk
+      - npm install cdk-assume-role-credential-plugin
   build:
     commands:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
       - echo Executing Synth for Integration
-      - npx cdk synth -c stage=integration
-      - ls
-      - cp -R ./cdk.out ../artifacts/integration
-      - echo Executing Synth for Prelive
-      - npx cdk synth -c stage=prelive
-      - cp -R ./cdk.out ../artifacts/prelive
-      - echo Executing Synth for Dev
-      - npx cdk synth -c stage=development
+      - npx cdk synth --plugin cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
