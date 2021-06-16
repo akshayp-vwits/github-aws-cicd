@@ -13,8 +13,8 @@ phases:
       - cd artifacts
       - mkdir development
       - cd ../cdk
+      - npm install
       - npm install -g aws-cdk
-      - cdk --version
       - npm install -g cdk-assume-role-credential-plugin
   build:
     commands:
