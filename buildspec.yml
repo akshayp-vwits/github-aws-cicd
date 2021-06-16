@@ -11,22 +11,19 @@ phases:
       - set -e -u -x
       - mkdir artifacts
       - cd artifacts
-      - mkdir integration
-      - mkdir prelive
       - mkdir development
       - cd ../cdk
       - npm install
       - npm install -g typescript
+      - npm install -g cdk-assume-role-credential-plugin
   build:
     commands:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
       - echo Executing Synth for Integration
-      - npx cdk bootstrap aws://064524996963/eu-west-1 aws://221090739390/eu-west-1
-      - npx cdk synth
-      - ls
-      - cp -R ./cdk.out ../artifacts/integration
+      - cdk synth --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
+      - cp ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
       - cp ../deployintspec.yml ../artifacts
