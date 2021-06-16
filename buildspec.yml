@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 14
       java: corretto8
   pre_build:
     commands:
@@ -13,8 +13,8 @@ phases:
       - cd artifacts
       - mkdir development
       - cd ../cdk
-      - npm install
-      - npm install -g typescript
+      - npm install -g aws-cdk
+      - cdk --version
       - npm install -g cdk-assume-role-credential-plugin
   build:
     commands:
