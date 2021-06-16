@@ -23,6 +23,7 @@
   "dependencies": {
     "@aws-cdk/aws-s3": "^1.108.0",
     "@aws-cdk/core": "1.108.0",
+    "cdk-assume-role-credential-plugin": "^1.2.3",
     "source-map-support": "^0.5.16"
   }
 }

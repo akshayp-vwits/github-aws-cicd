@@ -16,13 +16,16 @@ phases:
       - npm install
       - npm install -g aws-cdk
       - npm install cdk-assume-role-credential-plugin
+      - npm install -g cdk-assume-role-credential-plugin
   build:
     commands:
       - echo Entered Build Stage
       - echo Build Started
       - npm run build
       - echo Executing Synth for Integration
-      - npx cdk synth --plugin cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
+      - cdk bootstrap --trust 064524996963 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --plugin cdk-assume-role-credential-plugin --context bootstrap=true
+      - ls
+      - cdk synth --plugin cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
