@@ -24,7 +24,6 @@ phases:
       - npm run build
       - echo Executing Synth for Integration
       - cdk bootstrap --trust 064524996963 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess --plugin cdk-assume-role-credential-plugin --context bootstrap=true
-      - ls
       - cdk synth -v --plugin cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
