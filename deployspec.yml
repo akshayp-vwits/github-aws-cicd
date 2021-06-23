@@ -15,5 +15,5 @@ phases:
     commands:
       - cd ./artifacts/${ENV_NAME}
       - ls
-      - cdk deploy --app './cdk.out/' --plugin cdk-assume-role-credential-plugin -v --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole --parameters uploadBucketName=fx-development-all-infrastructure-cdk
+      - cdk deploy --app './cdk.out/' --plugin cdk-assume-role-credential-plugin -v --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
 
