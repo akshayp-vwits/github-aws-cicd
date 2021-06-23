@@ -23,7 +23,7 @@ phases:
       - echo Build Started
       - npm run build
       - echo Executing Synth for Integration
-      - cdk synth -v --plugin cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-hnb659fds-deploy-role-221090739390-eu-west-1 --context assume-role-credentials:readIamRoleName=cdk-hnb659fds-deploy-role-221090739390-eu-west-1
+      - cdk synth -v
       - cp -R ./cdk.out ../artifacts/development
       - cp ../buildspec.yml ../artifacts
       - cp ../deployspec.yml ../artifacts
