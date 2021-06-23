@@ -70,8 +70,8 @@ Resources:
               - Sid: CrossAccountDeploy
                 Effect: Allow
                 Action: sts:AssumeRole
-                Resource:
-                  - arn:aws:iam::221090739390:role/Cross_Account_Deploy
+                Resource: "*"
+
 
 
 
@@ -81,7 +81,7 @@ Resources:
       AuthType: PERSONAL_ACCESS_TOKEN
       ServerType: GITHUB
       Token: >-
-        {{resolve:secretsmanager:GITHUB_ACCESS:SecretString:GITHUB_ACCESS_TOKEN}}
+        {{resolve:secretsmanager:GITHUB_ACCESS1:SecretString:GITHUB_ACCESS_TOKEN}}
   CodeBuildProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -166,8 +166,7 @@ Resources:
               - Sid: CrossAccountDeploy
                 Effect: Allow
                 Action: sts:AssumeRole
-                Resource:
-                  - arn:aws:iam::221090739390:role/Cross_Account_Deploy
+                Resource: "*"
 
 
   CodePipelineartifact:
@@ -181,7 +180,7 @@ Resources:
     Properties:
       Authentication: GITHUB_HMAC
       AuthenticationConfiguration:
-        SecretToken: '{{resolve:secretsmanager:GITHUB_ACCESS:SecretString:GITHUB_ACCESS_TOKEN}}'
+        SecretToken: '{{resolve:secretsmanager:GITHUB_ACCESS1:SecretString:GITHUB_ACCESS_TOKEN}}'
       RegisterWithThirdParty: 'true'
       Filters:
         - JsonPath: '$.ref'
@@ -214,7 +213,7 @@ Resources:
                 Repo: !Ref GitHubRepository
                 Branch: !Ref GitHubBranch
                 PollForSourceChanges: false
-                OAuthToken: '{{resolve:secretsmanager:GITHUB_ACCESS:SecretString:GITHUB_ACCESS_TOKEN}}'
+                OAuthToken: '{{resolve:secretsmanager:GITHUB_ACCESS1:SecretString:GITHUB_ACCESS_TOKEN}}'
               OutputArtifacts:
                 - Name: SourceCode
         - Name: Build

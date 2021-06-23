@@ -15,5 +15,5 @@ phases:
     commands:
       - cd ./artifacts/${ENV_NAME}
       - echo checking
-      - cdk deploy --app './cdk.out/'
+      - cdk deploy --app './cdk.out/ --plugin cdk-assume-role-credential-plugin -v'
 
