@@ -2,6 +2,7 @@
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
 import { CdkStack } from '../lib/cdk-stack';
+import {DefaultStackSynthesizer} from "@aws-cdk/core";
 
 const app = new cdk.App();
 const envConfigs = {
@@ -30,5 +31,10 @@ const dev  = { account: '221090739390', region: 'eu-west-1' };
 //const acc_no = envConfigs[stage].account_id
 // @ts-ignore
 //const region1 = envConfigs[stage].region
-new CdkStack(app, 'dev', { env: dev });
+new CdkStack(app, 'dev', { env: dev ,
+        synthesizer: new DefaultStackSynthesizer({
+            // Name of the S3 bucket for file assets
+            fileAssetsBucketName: 'fx-development-all-infrastructure-cdk',
+        })},
+    );
 
