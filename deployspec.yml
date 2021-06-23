@@ -10,10 +10,10 @@ phases:
       - echo installing npm
       - npm install
       - npm install -g aws-cdk
-      - npm install -g cdk-assume-role-credential-plugin --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
+      - npm install -g cdk-assume-role-credential-plugin
   build:
     commands:
       - cd ./artifacts/${ENV_NAME}
       - ls
-      - cdk deploy --app './cdk.out/' --plugin cdk-assume-role-credential-plugin -v
+      - cdk deploy --app './cdk.out/' --plugin cdk-assume-role-credential-plugin -v --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
 
