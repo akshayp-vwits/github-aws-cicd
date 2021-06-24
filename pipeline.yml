@@ -98,7 +98,7 @@ Resources:
           Resource: !Ref CodeBuildSourceCredential1
       Artifacts:
         Location: !Ref CodePipelineartifact
-        NamespaceType: BUILD_ID
+        NamespaceType: NONE
         Name: '/'
         Path: 'develop'
         Type: S3
@@ -172,7 +172,7 @@ Resources:
   CodePipelineartifact:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: 'My_Artifact_Bucket'
+      BucketName: 'fx-artifact-bucket'
       VersioningConfiguration:
         Status: Enabled
 
