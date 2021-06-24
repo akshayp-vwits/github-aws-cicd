@@ -172,6 +172,7 @@ Resources:
   CodePipelineartifact:
     Type: 'AWS::S3::Bucket'
     Properties:
+      BucketName: 'My_Artifact_Bucket'
       VersioningConfiguration:
         Status: Enabled
 
