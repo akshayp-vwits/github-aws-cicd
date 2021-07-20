@@ -8,9 +8,16 @@ phases:
   pre_build:
     commands:
       - echo Test Build
+      - mkdir artifacts
   build:
     commands:
       - echo Test Building
+      - cp ./buildspec.yml ./artifacts/
+      - cp ./deployspec.yml ./artifacts/
+      - cp ./deployintspec.yml ./artifacts/
+      - cp ./deployprodspec.yml ./artifacts/
+      - cp ./versiontest.txt ./artifacts/
 artifacts:
   files:
-    - ./versiontest.txt
+    - '**/*'
+  base-directory: artifacts

@@ -9,5 +9,5 @@ phases:
       - ls
   build:
     commands:
-      - cat ./versiontest.txt
+      - cat ./artifacts/versiontest.txt
 
