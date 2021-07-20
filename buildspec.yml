@@ -7,27 +7,10 @@ phases:
       java: corretto8
   pre_build:
     commands:
-      - echo Entered Pre Build Stage
-      - set -e -u -x
-      - mkdir artifacts
-      - cd artifacts
-      - mkdir development
-      - cd ../cdk
-      - npm install
-      - npm install -g aws-cdk
-      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo Test Build
   build:
     commands:
-      - echo Entered Build Stage
-      - echo Build Started
-      - npm run build
-      - echo Executing Synth for Integration
-      - cdk synth -v
-      - cp -R ./cdk.out ../artifacts/development
-      - cp ../buildspec.yml ../artifacts
-      - cp ../deployspec.yml ../artifacts
-      - cp ../deployintspec.yml ../artifacts
-      - cp ../deployprodspec.yml ../artifacts
+      -echo Test Building
 artifacts:
   files:
-    - ./artifacts/**/*
+    - ./versiontest.txt
