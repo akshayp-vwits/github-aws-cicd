@@ -10,7 +10,7 @@ phases:
       - echo Test Build
   build:
     commands:
-      -echo Test Building
+      - echo Test Building
 artifacts:
   files:
     - ./versiontest.txt
