@@ -6,14 +6,8 @@ phases:
       nodejs: 12
   pre_build:
     commands:
-      - echo Entered Deploy Stage
-      - echo installing npm
-      - npm install
-      - npm install -g aws-cdk
-      - npm install -g cdk-assume-role-credential-plugin
+      - ls
   build:
     commands:
-      - cd ./artifacts/${ENV_NAME}
-      - ls
-      - cdk deploy --app './cdk.out/' --plugin cdk-assume-role-credential-plugin -v --context assume-role-credentials:writeIamRoleName=cdk-writeRole --context assume-role-credentials:readIamRoleName=cdk-readOnlyRole
+      - cat ./versiontest.txt
 

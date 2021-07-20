@@ -3,5 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo This is dummy prod stage deployment
+      - cat ./versiontest.txt
 
