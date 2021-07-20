@@ -287,7 +287,7 @@ Resources:
         - Arn
       Source:
         Type: CODEPIPELINE
-        BuildSpec: ./artifacts/deployspec.yml
+        BuildSpec: ./deployspec.yml
       Artifacts:
         Type: CODEPIPELINE
       Environment:
@@ -307,7 +307,7 @@ Resources:
         - Arn
       Source:
         Type: CODEPIPELINE
-        BuildSpec: ./artifacts/deployintspec.yml
+        BuildSpec: ./deployintspec.yml
       Artifacts:
         Type: CODEPIPELINE
       Environment:
@@ -327,7 +327,7 @@ Resources:
         - Arn
       Source:
         Type: CODEPIPELINE
-        BuildSpec: ./artifacts/deployprodspec.yml
+        BuildSpec: ./deployprodspec.yml
       Artifacts:
         Type: CODEPIPELINE
       Environment:
