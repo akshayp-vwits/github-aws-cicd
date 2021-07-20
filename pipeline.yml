@@ -246,7 +246,6 @@ Resources:
         - Name: Integration_Deploy
           Actions:
             - Name: Integration_Deploy
-              RunOrder: 1
               ActionTypeId:
                 Category: Build
                 Owner: AWS
@@ -256,8 +255,9 @@ Resources:
                 ProjectName: !Ref CodeDeployProjectInt
               InputArtifacts:
                 - Name: BuildOutput
+        - Name: Approval
+          Actions:
             - Name: Approval
-              RunOrder: 2
               ActionTypeId:
                 Category: Approval
                 Owner: AWS
