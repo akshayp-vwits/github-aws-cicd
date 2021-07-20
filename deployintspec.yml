@@ -3,5 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - cat ./versiontest.txt
+      - cat ./artifacts/versiontest.txt
 
