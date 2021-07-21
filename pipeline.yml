@@ -246,6 +246,7 @@ Resources:
         - Name: Integration_Deploy
           Actions:
             - Name: Integration_Deploy
+              RunOrder: 1
               ActionTypeId:
                 Category: Build
                 Owner: AWS
@@ -253,6 +254,19 @@ Resources:
                 Version: '1'
               Configuration:
                 ProjectName: !Ref CodeDeployProjectInt
+              InputArtifacts:
+                - Name: BuildOutput
+            - Name: Copy-Artifacts
+              RunOrder: 1
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: S3
+                Version: '1'
+              Configuration:
+                BucketName: fx-artifact-bucket
+                Extract: true
+                ObjectKey: fx-vehicle-indexer/prod-infra
               InputArtifacts:
                 - Name: BuildOutput
         - Name: Approval
